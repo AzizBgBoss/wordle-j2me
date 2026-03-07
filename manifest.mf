@@ -1,0 +1,6 @@
+MIDlet-Name: MyMIDlet
+MIDlet-Version: 1.0
+MIDlet-Vendor: AzizBgBoss
+MIDlet-1: MyMIDlet,,com.example.myapp.MyMIDlet
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
