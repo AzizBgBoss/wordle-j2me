@@ -774,37 +774,75 @@ public class Words23 {
         newGame();
     }
 
-private String pickWord(int id) {
-    int absId = Math.abs(id);
-    int chunk = absId % 24; // there are 24 WordsN classes (0–23)
-    int idx   = absId;
+private String pickWord(int idx) {
+    // convert a global index into a word by walking chunks sequentially
+    int i = Math.abs(idx) % WORDS_LENGTH; // ensure in [0,WORDS_LENGTH)
+    int chunk = 0;
 
-    switch (chunk) {
-        case 0:  return Words0.W.substring( (idx % Words0.COUNT)  * 5, (idx % Words0.COUNT  + 1) * 5);
-        case 1:  return Words1.W.substring( (idx % Words1.COUNT)  * 5, (idx % Words1.COUNT  + 1) * 5);
-        case 2:  return Words2.W.substring( (idx % Words2.COUNT)  * 5, (idx % Words2.COUNT  + 1) * 5);
-        case 3:  return Words3.W.substring( (idx % Words3.COUNT)  * 5, (idx % Words3.COUNT  + 1) * 5);
-        case 4:  return Words4.W.substring( (idx % Words4.COUNT)  * 5, (idx % Words4.COUNT  + 1) * 5);
-        case 5:  return Words5.W.substring( (idx % Words5.COUNT)  * 5, (idx % Words5.COUNT  + 1) * 5);
-        case 6:  return Words6.W.substring( (idx % Words6.COUNT)  * 5, (idx % Words6.COUNT  + 1) * 5);
-        case 7:  return Words8.W.substring( (idx % Words8.COUNT)  * 5, (idx % Words8.COUNT  + 1) * 5);
-        case 8:  return Words9.W.substring( (idx % Words9.COUNT)  * 5, (idx % Words9.COUNT  + 1) * 5);
-        case 9:  return Words10.W.substring((idx % Words10.COUNT) * 5, (idx % Words10.COUNT + 1) * 5);
-        case 10: return Words11.W.substring((idx % Words11.COUNT) * 5, (idx % Words11.COUNT + 1) * 5);
-        case 11: return Words12.W.substring((idx % Words12.COUNT) * 5, (idx % Words12.COUNT + 1) * 5);
-        case 12: return Words13.W.substring((idx % Words13.COUNT) * 5, (idx % Words13.COUNT + 1) * 5);
-        case 13: return Words14.W.substring((idx % Words14.COUNT) * 5, (idx % Words14.COUNT + 1) * 5);
-        case 14: return Words15.W.substring((idx % Words15.COUNT) * 5, (idx % Words15.COUNT + 1) * 5);
-        case 15: return Words16.W.substring((idx % Words16.COUNT) * 5, (idx % Words16.COUNT + 1) * 5);
-        case 16: return Words17.W.substring((idx % Words17.COUNT) * 5, (idx % Words17.COUNT + 1) * 5);
-        case 17: return Words18.W.substring((idx % Words18.COUNT) * 5, (idx % Words18.COUNT + 1) * 5);
-        case 18: return Words19.W.substring((idx % Words19.COUNT) * 5, (idx % Words19.COUNT + 1) * 5);
-        case 19: return Words20.W.substring((idx % Words20.COUNT) * 5, (idx % Words20.COUNT + 1) * 5);
-        case 20: return Words21.W.substring((idx % Words21.COUNT) * 5, (idx % Words21.COUNT + 1) * 5);
-        case 21: return Words22.W.substring((idx % Words22.COUNT) * 5, (idx % Words22.COUNT + 1) * 5);
-        case 22: return Words23.W.substring((idx % Words23.COUNT) * 5, (idx % Words23.COUNT + 1) * 5);
-        default: // should never happen, but fall back to Words0
-            return Words0.W.substring( (idx % Words0.COUNT)  * 5, (idx % Words0.COUNT  + 1) * 5);
+    while (true) {
+        int count;
+        switch (chunk) {
+            case 0:  count = Words0.COUNT;  break;
+            case 1:  count = Words1.COUNT;  break;
+            case 2:  count = Words2.COUNT;  break;
+            case 3:  count = Words3.COUNT;  break;
+            case 4:  count = Words4.COUNT;  break;
+            case 5:  count = Words5.COUNT;  break;
+            case 6:  count = Words6.COUNT;  break;
+            case 7:  count = Words7.COUNT;  break;
+            case 8:  count = Words8.COUNT;  break;
+            case 9:  count = Words9.COUNT;  break;
+            case 10: count = Words10.COUNT; break;
+            case 11: count = Words11.COUNT; break;
+            case 12: count = Words12.COUNT; break;
+            case 13: count = Words13.COUNT; break;
+            case 14: count = Words14.COUNT; break;
+            case 15: count = Words15.COUNT; break;
+            case 16: count = Words16.COUNT; break;
+            case 17: count = Words17.COUNT; break;
+            case 18: count = Words18.COUNT; break;
+            case 19: count = Words19.COUNT; break;
+            case 20: count = Words20.COUNT; break;
+            case 21: count = Words21.COUNT; break;
+            case 22: count = Words22.COUNT; break;
+            case 23: count = Words23.COUNT; break;
+            default: count = 0; break;
+        }
+
+        if (i < count) {
+            String w;
+            switch (chunk) {
+                case 0:  w = Words0.W;  break;
+                case 1:  w = Words1.W;  break;
+                case 2:  w = Words2.W;  break;
+                case 3:  w = Words3.W;  break;
+                case 4:  w = Words4.W;  break;
+                case 5:  w = Words5.W;  break;
+                case 6:  w = Words6.W;  break;
+                case 7:  w = Words7.W;  break;
+                case 8:  w = Words8.W;  break;
+                case 9:  w = Words9.W;  break;
+                case 10: w = Words10.W; break;
+                case 11: w = Words11.W; break;
+                case 12: w = Words12.W; break;
+                case 13: w = Words13.W; break;
+                case 14: w = Words14.W; break;
+                case 15: w = Words15.W; break;
+                case 16: w = Words16.W; break;
+                case 17: w = Words17.W; break;
+                case 18: w = Words18.W; break;
+                case 19: w = Words19.W; break;
+                case 20: w = Words20.W; break;
+                case 21: w = Words21.W; break;
+                case 22: w = Words22.W; break;
+                case 23: w = Words23.W; break;
+                default: w = Words0.W; break;
+            }
+            return w.substring(i * WORD_LENGTH, (i + 1) * WORD_LENGTH);
+        }
+
+        i -= count;
+        chunk++;
     }
 }
 
@@ -865,7 +903,7 @@ private String pickWord(int id) {
 
     // --- Check if word is valid ---
     private boolean isValidWord(String word) {
-        for (int i = 0; i < WORDS_LENGTH / WORD_LENGTH; i++) {
+        for (int i = 0; i < WORDS_LENGTH; i++) {
             if (pickWord(i).equals(word)) {
                 return true;
             }
