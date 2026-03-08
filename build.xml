@@ -62,7 +62,8 @@
     <target name="jar" depends="preverify">
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/${midlet.name}.jar"
-             basedir="${preverify.dir}">
+            basedir="${preverify.dir}">
+            <fileset dir="${src.dir}" includes="*.png"/>
             <manifest>
                 <attribute name="MIDlet-Name"                value="${midlet.name}"/>
                 <attribute name="MIDlet-Version"             value="${midlet.version}"/>
