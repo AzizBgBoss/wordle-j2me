@@ -765,6 +765,7 @@ public class Words23 {
     private Command cmdQuit;
     private Command cmdOk;
     private Command cmdBack;
+    private Command cmdCredits;
 
     private java.util.Random rng = new java.util.Random();
 
@@ -970,6 +971,15 @@ private String pickWord(int idx) {
                 midlet.getDisplay().setCurrent(canvas);
             }
         }
+        if (c == cmdCredits) {
+            String credits = "Wordle for Java ME\n" +
+                             "Version " + midlet.getVersion() + "\n\n" +
+                             "by AzizBgBoss\n\n" +
+                             "https://github.com/AzizBgBoss/wordle-j2me";
+            Alert a = new Alert("Credits", credits, null, AlertType.INFO);
+            a.setTimeout(Alert.FOREVER);
+            midlet.getDisplay().setCurrent(a, canvas);
+        }
     }
 
     public Canvas getCanvas() {
@@ -984,10 +994,12 @@ private String pickWord(int idx) {
 
             cmdGuess = new Command("Guess", Command.OK,     1);
             cmdNew   = new Command("New",   Command.SCREEN, 2);
-            cmdQuit  = new Command("Quit",  Command.EXIT,   3);
+            cmdCredits = new Command("Credits", Command.SCREEN, 3);
+            cmdQuit  = new Command("Quit",  Command.EXIT,   4);
 
             addCommand(cmdGuess);
             addCommand(cmdNew);
+            addCommand(cmdCredits);
             addCommand(cmdQuit);
             setCommandListener(this);
         }

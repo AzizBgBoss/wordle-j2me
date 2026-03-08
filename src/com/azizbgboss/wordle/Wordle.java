@@ -7,6 +7,10 @@ public class Wordle extends MIDlet {
     private Display display;
     private WordleGame game;
 
+    public String getVersion() {
+        return getAppProperty("MIDlet-Version");
+    }
+
     public void startApp() {
         display = Display.getDisplay(this);
         game = new WordleGame(this);
