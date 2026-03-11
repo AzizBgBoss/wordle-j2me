@@ -1027,15 +1027,19 @@ private String pickWord(int idx) {
             g.drawLine(0, titleFont.getHeight() + 6, screenW, titleFont.getHeight() + 6);
 
             // --- Grid layout ---
-            int tileSize    = (screenW - 40) / WORD_LENGTH; // tile width
-            if (tileSize > 36) tileSize = 36;               // cap size
-            int tileGap     = 4;
+            int availH      = screenH - titleFont.getHeight() - 14 - 30; // 30 for status msg
+            int tileSizeW   = (screenW - 40) / WORD_LENGTH;
+            int tileSizeH   = (availH - (MAX_GUESSES - 1) * 4) / MAX_GUESSES;
+            int tileSize    = tileSizeW < tileSizeH ? tileSizeW : tileSizeH;
+            if (tileSize > 36) tileSize = 36;
+            int tileGap     = tileSize / 8 + 2; // scale gap with tile
             int gridW       = WORD_LENGTH * tileSize + (WORD_LENGTH - 1) * tileGap;
             int gridH       = MAX_GUESSES * tileSize + (MAX_GUESSES - 1) * tileGap;
             int gridX       = (screenW - gridW) / 2;
             int gridY       = titleFont.getHeight() + 14;
 
-            Font letterFont = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_LARGE);
+            int fontSize = tileSize >= 30 ? Font.SIZE_LARGE : (tileSize >= 22 ? Font.SIZE_MEDIUM : Font.SIZE_SMALL);
+            Font letterFont = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, fontSize);
             g.setFont(letterFont);
 
             for (int row = 0; row < MAX_GUESSES; row++) {
